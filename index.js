@@ -6,3 +6,19 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 app.use(bodyParser.json());
 
+
+const db = mysql.createConnection({
+    host: '127.0.0.1',
+    user: 'root',
+    port: '3309',
+    password: 'irfanfauzi',
+    database: 'mahasiswa' 
+});
+
+db.connect((err) => {
+    if (err) {
+        console.error('Error connecting to MySQL:', err.stack);
+        return;
+    }
+    console.log('Connected to MySQL successfully.');
+});
