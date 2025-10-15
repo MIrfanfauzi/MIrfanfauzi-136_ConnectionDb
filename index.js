@@ -22,3 +22,7 @@ db.connect((err) => {
     }
     console.log('Connected to MySQL successfully.');
 });
+
+app.get('/', (req, res) => {
+    res.send('Hello World! API Biodata aktif 🚀');
+});
