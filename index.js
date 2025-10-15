@@ -40,3 +40,18 @@ app.get('/biodata', (req, res) => {
     });
 });
 
+app.post('/biodata', (req, res) => {
+    const {Nama, Alamat, Agama } = req.body;
+    if (!Nama || !Alamat || !Agama ) {
+        return res.status(400).json({ error: 'Semua field wajib diisi.' });
+    }
+    const query = 'INSERT INTO biodata (Nama, Alamat, Agama ) VALUES (?, ?, ?)';
+    db.query(query, [Nama, Alamat, Agama], (err, result) => {
+        if (err) {
+            console.error('Error inserting data:', err);
+            res.status(500).json({ error: 'Gagal menambahkan data.' });
+        } else {
+            res.status(201).json({ message: 'Data biodata berhasil ditambahkan!', id: result.insertId });
+        }
+    });
+});
