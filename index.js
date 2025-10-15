@@ -26,3 +26,17 @@ db.connect((err) => {
 app.get('/', (req, res) => {
     res.send('Hello World! API Biodata aktif 🚀');
 });
+
+
+app.get('/biodata', (req, res) => {
+    const query = 'SELECT * FROM biodata';
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Error fetching data:', err);
+            res.status(500).json({ error: 'Terjadi kesalahan saat mengambil data.' });
+        } else {
+            res.status(200).json(results);
+        }
+    });
+});
+
